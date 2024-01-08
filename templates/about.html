@@ -14,10 +14,14 @@
   leave on other business, welcomed a fourteenth to fill into their party.
 </p>
 
+<!-- Loop to iterate over each member in the company.json file -->
 {% for member in company %}
+<!-- Our loop is indexed - so can easily do every 2nd div with {{ loop.index }} -->
+
 <div class="row featurette">
+  {% if loop.index % 2 != 0 %}
   <div class="col-md-7">
-    <h3>{{ member.name }}</h3>
+    <h3>{{ loop.index }}. {{ member.name }}</h3>
     <p>{{ member.description }}</p>
   </div>
   <div class="col-md-5">
@@ -27,6 +31,20 @@
       class="featurette-image image-responsive"
     />
   </div>
+  {% else %}
+  <div class="col-md-5">
+    <img
+      src="{{ member.image_source }}"
+      alt=""
+      class="featurette-image image-responsive"
+    />
+  </div>
+  <div class="col-md-7">
+    <h3>{{ loop.index }}. {{ member.name }}</h3>
+    <p>{{ member.description }}</p>
+  </div>
+  {% endif %}
 </div>
+{% if loop.index != loop.length %}
 <hr class="featurette-divider" />
-{% endfor %} {% endblock %}
+{% endif %} {% endfor %} {% endblock %}
